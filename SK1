@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+using namespace std;
+using namespace __gnu_cxx;
+
+int precision(char c)
+{
+    if (c == '^')
+        return 3;
+    else if (c == '/' || c == '*')
+        return 2;
+    else if (c == '+' || c == '-')
+        return 1;
+    else
+        return -1;
+}
+
+void infixToPostfix(string s)
+{
+ 	cout<<"s"<<s<<endl;
+    stack<char> st;  
+    string result;
+ 
+    for (int i = 0; i < s.length(); i++) {
+        char element = s[i];
+        if ((element >= 'a' && element <= 'z') || (element >= 'A' && element <= 'Z')
+            || (element >= '0' && element <= '9'))
+            result += element;
+        else if (element == '(')
+            st.push('(');
+        else if (element == ')') {
+        	cout<<"1";
+            while (st.top() != '(') {
+                result += st.top();
+                st.pop();
+            }
+            st.pop();
+        }
+ 
+        
+        else {
+            while (!st.empty()
+                   && precision(s[i]) <= precision(st.top())) {
+                result += st.top();
+                st.pop();
+            }
+            st.push(element);
+        }
+    }
+ 
+    // Pop all the remaining elements from the stack
+    while (!st.empty()) {
+        result += st.top();
+        st.pop();
+    }
+ 
+//    cout << result << endl;
+}
+ 
+// Driver's code
+int main()
+{
+    string exp = "A+B*(C-D)/(P-R)";
+ 
+    // Function call
+    infixToPostfix(exp);
+    return 0;
+}
