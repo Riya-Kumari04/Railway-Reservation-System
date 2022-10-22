@@ -1,0 +1,123 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+class node{
+	public:
+	int data;
+	node *next;
+}*start;
+
+void add_node(){
+	node *ptr;
+	int a;
+	ptr=new node;
+	if (ptr==NULL){
+		cout<<"memory full";
+	}
+	cout<<"Enter element: ";
+	cin>>a;
+	ptr->data=a;
+	ptr->next=start;
+	start=ptr;
+}
+void del_node(){
+	node *ptr, *ptr1;  
+        int loc,i;   
+        cout<<"Enter the postion of the number you want to delete: ";
+        cin>>loc;  
+        ptr=start;  
+        for(i=0;i<loc;i++)  
+        {  
+            ptr1 = ptr;       
+            ptr = ptr->next;  
+              
+            if(ptr == NULL)  
+            {  
+                cout<<"\nThere are less than "<<loc<<" elements in the list..\n";  
+                return;  
+            }  
+        }  
+        ptr1 ->next = ptr ->next;  
+        free(ptr);  
+        cout<<"\nDeleted "<<loc<<" node ";  
+}           
+void search_node(){
+ 	node *ptr;  
+    int item,i=0,flag;  
+    ptr = start;   
+    if(ptr == NULL)  
+    {  
+        printf("\nEmpty List\n");  
+    }  
+    else  
+    {   
+        cout<<"\nEnter item which you want to search?\n";   
+        cin>>item;  
+        while (ptr!=NULL)  
+        {  
+            if(ptr->data == item)  
+            {  
+                cout<<"item found at location :"<<i+1;  
+                flag=0;  
+            }   
+            else  
+            {  
+                flag=1;  
+            }  
+            i++;  
+            ptr = ptr -> next;  
+        }  
+        if(flag==1)  
+        {  
+            printf("\nItem not found\n");  
+        }  
+    }     
+ }
+void display(){
+ 	struct node *ptr;
+ 	ptr=start;
+ 	if(start==NULL){
+ 		cout<<"empty list";
+ 		return;
+	 }
+	while(ptr!=NULL){
+		cout<<"entered elements are: ";
+		cout<<ptr->data<<endl;
+		ptr=ptr->next;
+	}
+ }
+ 
+int main(){
+	int op,a;
+	do{
+		cout<<"\n..MENU.."<<endl;
+		cout<<"1)ADD\t2)DELETE\t3)SEARCH\t4)DISPLAY\t5)EXIT"<<endl;
+		cout<<"\nEnter your choice: ";
+		cin>>op;
+		switch (op){
+			case 1:
+				cout<<"Enter how many no. you want to Insert:";
+				cin>>a;
+				for(int i=0;i<a;i++){
+					add_node();
+				}
+				break;
+			case 2:
+				del_node();
+				break;
+			case 3:
+				search_node();
+				break;
+			case 4:
+				display();
+				break;
+			case 0:
+				cout<<"BYE BYE";
+				break;
+		}
+	}
+	while(op!=0);
+
+	return 0;
+}
