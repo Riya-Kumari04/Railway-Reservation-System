@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+
+void instert(){
+    
+}
+void del(int arr[]){
+	int pos,n,c;
+    cout<<"enter the location where you want to delet the element: ";
+    cin>>pos;
+    if(pos>=n+1){
+        cout<<"Deletion not possible : ";
+    }
+    else {
+        for(c=pos-1;c<n-1;c++){
+            arr[c]=arr[c+1];
+        }
+    }
+    cout<<"resultant Array: ";
+    for(c=0;c<n-1;c++){
+        cout<<arr[c]<<" ";
+    }
+}
+void linear(){
+    int arr[10],i,n,a;
+	for(i=0;i<n;i++){
+	cin>>arr[i];
+	}
+	cout<<"Enter the number you are searching for";
+	cin>>a;
+	for(i=1;i<n;i++){
+		if(arr[i]==a){
+		cout<<"The position is"<<i<<endl;
+		}
+	}
+	}
+
+int main()
+{
+    int ch;
+    int arr[10],n,c;
+    cout<<"Enter the size of elements ";
+    cin>>n;
+    cout<<"Enter the elements: ";
+    for(c=0;c<n;c++){
+        cin>>arr[c];
+    }
+    cout<<"What would you like to do\n1. Insert a new element \n2. delete any element\n3. Display the element of the liner array";
+    cout<<"\nEnter your choice ";
+    cin>>ch;
+    switch (ch){
+        case 1:{
+            instert();
+            break;
+        }
+        case 2:{
+        	del(arr);
+			break;
+		}
+		case 3:{
+			linear();
+			break;
+		}
+	}
+	return 0;
+}
